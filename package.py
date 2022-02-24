@@ -1,15 +1,15 @@
 
 class Package:
     """
-    !!!DELETE IF NOT USING!!!
-    Package object to hold package data
+    Package object that holds package data
     """
+    delivered_status = ["at the hub", "en route", "delivered"]
 
-    def __init__(self, package_id, address, deadline, city, zipcode, weight, status):
+    def __init__(self, package_id, address, deadline, city, zipcode, weight):
         self.package_id = package_id
         self.address = address
         self.deadline = deadline
         self.city = city
         self.zipcode = zipcode
         self.weight = weight
-        self.status = status
+        self.status = self.delivered_status[0]

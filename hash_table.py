@@ -11,20 +11,19 @@ class HashTable:
         for i in range(self.table_size):
             self.table.append([])
 
-    def insert_item(self, package_id, address, deadline, city, zipcode, weight, status):
-        delivered_time = "0:00"
+    def insert_item(self, package_id, package):
         index = self.hash(package_id)
         if not self.table[index]:
-            self.table[index].append([package_id, address, deadline, city, zipcode, weight, status, delivered_time])
+            self.table[index].append(package)
             return True
         for package in self.table[index]:
-            if package[0] == package_id:
+            if package.package_id == package_id:
                 return False
 
     def lookup_item(self, package_id):
         index = self.hash(package_id)
         for package in self.table[index]:
-            if package[0] == package_id:
+            if package.package_id == package_id:
                 return package
         return False
 
