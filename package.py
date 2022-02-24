@@ -1,5 +1,9 @@
 
 class Package:
+    """
+    !!!DELETE IF NOT USING!!!
+    Package object to hold package data
+    """
 
     def __init__(self, package_id, address, deadline, city, zipcode, weight, status):
         self.package_id = package_id

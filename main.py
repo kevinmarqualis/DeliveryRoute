@@ -1,8 +1,12 @@
 # Kevin McBride ID: 010009106
-from hash_table import HashTable
+from truck import Truck
+from package import Package
+from location import Location
 
-truck1 = HashTable
-truck2 = HashTable
-truck3 = HashTable
+truck1 = Truck()
+truck2 = Truck()
+truck3 = Truck()
+
+city_map = []
 
 
