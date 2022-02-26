@@ -1,12 +1,16 @@
 # Kevin McBride ID: 010009106
+from data import *
 from truck import Truck
 from hash_table import HashTable
-from package import Package
 from location import Location
 
 
 # load package data from csv and store in HashTable
 packages = HashTable()
+load_package_data(packages)
+
+# load distance data
+
 
 # load packages from the packages HashTable into the trucks
 truck1 = Truck()
@@ -17,3 +21,5 @@ truck3 = Truck()
 city_map = []
 
 
+# Test Print Statements
+print(packages.lookup_item('28'))
