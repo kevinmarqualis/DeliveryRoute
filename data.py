@@ -1,5 +1,6 @@
 import csv
 from package import Package
+from graph import Graph
 
 
 def load_package_data(hashtable):
@@ -18,6 +19,21 @@ def load_package_data(hashtable):
             hashtable.insert_item(current_package.package_id, current_package)
 
 
-def load_distance_data(distances):
+def load_distance_data(graph: Graph()):
+    address_list = []
+    distance_list = []
+    with open('distance_data.csv', encoding='utf-8-sig') as distance_data:
+        reader = csv.DictReader(distance_data)
+        for row in reader:
+            curr_address = row['Address'].split('(')[0].strip()
+            address_list.append(curr_address)
+            distance_list.append(row)
 
-    return distances
+    for i in range(len(address_list)):
+        graph.add_location(address_list[i])
+        for k, v in distance_list[i].items():
+            if k == 'Address':
+                continue
+            if v == '':
+                break
+            graph.add_distance(address_list[i], k, v)
