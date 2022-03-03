@@ -1,14 +1,3 @@
-"""
-class Location:
-    Vertex class for the graph representation of the city
-    Takes the location name as a parameter
-
-
-    def __init__(self, name):
-        self.name = name
-"""
-
-
 class Graph:
     """
     Graph builder implementation for locations in the delivery area
