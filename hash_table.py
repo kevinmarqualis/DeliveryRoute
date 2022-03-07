@@ -5,8 +5,8 @@ class HashTable:
     Hash Function takes sum of the values in the id mod table size
     """
 
-    def __init__(self):
-        self.table_size = 10
+    def __init__(self, table_size=10):
+        self.table_size = table_size
         self.table = []
         for i in range(self.table_size):
             self.table.append([])
@@ -24,9 +24,17 @@ class HashTable:
         index = self.hash(package_id)
         for package in self.table[index]:
             if package.package_id == package_id:
-                return [package.package_id, package.address, package.city, package.zipcode, package.deadline,
-                        package.weight, package.status]
+                return package
         print("That package does not exist.")
+
+    def remove_item(self, package_id):
+        index = self.hash(package_id)
+        for package in self.table[index]:
+            if package.package_id == package_id:
+                self.table[index].remove(package)
+                return True
+
+        return False
 
     def hash(self, key):
         return int(key) % self.table_size

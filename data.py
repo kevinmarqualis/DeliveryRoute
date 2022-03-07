@@ -1,6 +1,6 @@
 import csv
 from package import Package
-from graph import Graph
+from map import *
 
 
 def load_package_data(hashtable):
@@ -36,4 +36,4 @@ def load_distance_data(graph: Graph()):
                 continue
             if v == '':
                 break
-            graph.add_distance(address_list[i], k, v)
+            graph.add_edge(address_list[i], k, v)
