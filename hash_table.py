@@ -26,6 +26,7 @@ class HashTable:
             if package.package_id == package_id:
                 return package
         print("That package does not exist.")
+        return False
 
     def remove_item(self, package_id):
         index = self.hash(package_id)
