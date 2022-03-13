@@ -71,4 +71,9 @@ truck3.load_package(packages.lookup_item('23'))
 truck3.load_package(packages.lookup_item('24'))
 truck3.deliver_packages(city_map)
 
-print(round(truck1.miles_driven + truck2.miles_driven + truck3.miles_driven, 2))
+total_time_to_deliver = round(truck1.miles_driven + truck2.miles_driven + truck3.miles_driven, 2)
+
+user_input = ''
+while user_input != 'q':
+    print('What do you want to do?\n')
+    

@@ -41,7 +41,7 @@ class Truck:
 
             current_package = self.truck_storage.lookup_item(package_id)
             current_package.status = current_package.delivered_statuses[2]
-            current_package.delivered_time = self.current_time
+            current_package.delivered_time = self.current_time.strftime("%I:%M %p")
         return True
 
     def find_optimized_route(self, graph):  # O(n^2)
