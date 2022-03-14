@@ -6,7 +6,7 @@ class Graph:
         self.adjacency_list = {}
         self.edge_distances = {}
 
-    def add_location(self, new_location):
+    def add_location(self, new_location):  # O(1) time complexity
         """
         Adds a location to the adjacency list for an instance
         :param new_location:
@@ -14,7 +14,7 @@ class Graph:
         """
         self.adjacency_list[new_location] = []
 
-    def add_edge(self, start_location, end_location, distance):
+    def add_edge(self, start_location, end_location, distance):  # O(1) time complexity
         """
         Adds an undirected edge between "start_location" to "end_location" with a weight of "distance"
         :param start_location:

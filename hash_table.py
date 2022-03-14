@@ -11,7 +11,7 @@ class HashTable:
         for i in range(self.table_size):
             self.table.append([])
 
-    def insert_item(self, package_id, new_package):
+    def insert_item(self, package_id, new_package):  # O(n) time complexity
         index = self.hash(package_id)
         for package in self.table[index]:
             if package.package_id == package_id:
@@ -20,7 +20,7 @@ class HashTable:
         self.table[index].append(new_package)
         return True
 
-    def lookup_item(self, package_id):
+    def lookup_item(self, package_id):  # O(n) time complexity
         index = self.hash(package_id)
         for package in self.table[index]:
             if package.package_id == package_id:
@@ -28,7 +28,7 @@ class HashTable:
         print("That package does not exist.")
         return False
 
-    def remove_item(self, package_id):
+    def remove_item(self, package_id):  # O(n) time complexity
         index = self.hash(package_id)
         for package in self.table[index]:
             if package.package_id == package_id:
@@ -37,5 +37,5 @@ class HashTable:
 
         return False
 
-    def hash(self, key):
+    def hash(self, key):  # O(1) time complexity
         return int(key) % self.table_size
