@@ -156,8 +156,14 @@ while user_input != 'q':
     # Takes an ID as an input and displays the package information corresponding to the ID given
     elif user_input == 'id':
         package_id = input('Enter a package id: ')
-        if 1 < int(package_id) < 41:
-            package = packages.lookup_item(package_id)
+        try:
+            package_id = int(package_id)
+        except ValueError:
+            print('Invalid ID entered.')
+            continue
+
+        if 1 < package_id < 41:
+            package = packages.lookup_item(str(package_id))
             print(package.get_current_status())
         else:
             print('Invalid ID entered. Please try again.')
