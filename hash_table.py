@@ -3,6 +3,7 @@ class HashTable:
     """
     Implementation of a hash table that contains an insert, lookup, and remove function.
     Allows the user to specify the size by providing a size parameter upon instantiation
+    O(N) space complexity where N is the number of items inserted
     """
 
     def __init__(self, table_size=10):
