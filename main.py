@@ -4,9 +4,12 @@ from data import *
 from truck import Truck
 from hash_table import HashTable
 from map import *
-from time import time
 from datetime import datetime
 
+#
+# Overall time complexity of this application is bound by the functions that are O(N^2), so the overall efficiency of
+# this application is O(N^2).
+#
 
 # Load package data from csv and store in HashTable
 packages = HashTable()
@@ -17,7 +20,7 @@ city_map = Graph()
 load_distance_data(city_map)
 
 # Load packages from the packages HashTable into the trucks
-# Start time is 8:00am
+# Start time is 8:00am for Truck 1
 truck1 = Truck('1', 8, 0, 0)
 # Load packages into truck 1
 truck1.load_package(packages.lookup_item('1'))
@@ -38,7 +41,7 @@ truck1.load_package(packages.lookup_item('39'))
 truck1.load_package(packages.lookup_item('40'))
 truck1.deliver_packages(city_map)
 
-# Start time is 8:00am
+# Start time is 8:00am for Truck 2
 truck2 = Truck('2', 8, 0, 0)
 # Load packages into truck 2
 truck2.load_package(packages.lookup_item('2'))
@@ -59,7 +62,7 @@ truck2.load_package(packages.lookup_item('37'))
 truck2.load_package(packages.lookup_item('38'))
 truck2.deliver_packages(city_map)
 
-# Start time is 10:20am waiting for updated address for package 9
+# Start time is 10:20am for Truck 3; waiting for correct address for package 9
 truck3 = Truck('3', 10, 20, 0)
 package9 = packages.lookup_item('9')
 package9.address = '410 S State St'
@@ -81,7 +84,7 @@ user_input = ''
 while user_input != 'q':
     print('\n-------WELCOME TO THE WGUPS PROGRAM!-------')
     print('\nt -> "List status of packages at a specified time"\n')
-    print('id -> "List package information by id"\n')
+    print('id -> "Get package information by id"\n')
     print('d -> "Get distance and time traveled by each truck"\n')
     print('q -> "Quit"\n')
 
@@ -98,7 +101,14 @@ while user_input != 'q':
         if chosen_time < datetime.strptime('08:00 AM', '%I:%M %p'):
             print('Please enter a time after 07:59 AM')
             continue
-        # Print Truck 1 Package Statuses
+
+        #
+        # The following code finds the closest time in the truck_information dictionary to the user input time
+        # to display package statuses at a particular time. It also grabs the miles driven by the truck up to the
+        # specified time by using the truck_information dictionary. Time complexity of each for loop is O(N).
+        #
+
+        # Print Truck 1 Package Statuses based on the provided time
         closest_time = datetime.strptime('08:00 AM', '%I:%M %p')
         log_time = ''
         for k in truck1.truck_information:
@@ -107,13 +117,12 @@ while user_input != 'q':
                 closest_time = time_key
                 log_time = k
         print('\n---TRUCK 1 PACKAGES---\n')
-        # print(truck1.truck_information[log_time])
         for pack in truck1.truck_information[log_time]:
             print(pack[0], '\n')
         truck1_miles = truck1.truck_information[log_time][0][1]
         print('Miles Driven -- ' + str(truck1_miles))
 
-        # Print Truck 2 Package Statuses
+        # Print Truck 2 Package Statuses based on the provided time
         closest_time = datetime.strptime('08:00 AM', '%I:%M %p')
         log_time = ''
         for k in truck2.truck_information:
@@ -122,7 +131,6 @@ while user_input != 'q':
                 closest_time = time_key
                 log_time = k
         print('\n---TRUCK 2 PACKAGES---\n')
-        # print(truck2.truck_information[log_time])
         for pack in truck2.truck_information[log_time]:
             print(pack[0], '\n')
         truck2_miles = truck2.truck_information[log_time][0][1]
@@ -145,7 +153,7 @@ while user_input != 'q':
         print('Total miles driven at ' + chosen_time.strftime('%I:%M %p') + ' is ' +
               str(round(truck1_miles + truck2_miles + truck3_miles, 2)) + ' miles.')
 
-    # handle package display by id
+    # Takes an ID as an input and displays the package information corresponding to the ID given
     elif user_input == 'id':
         package_id = input('Enter a package id: ')
         if 1 < int(package_id) < 41:
@@ -154,7 +162,7 @@ while user_input != 'q':
         else:
             print('Invalid ID entered. Please try again.')
 
-    # handle truck travel distance
+    # Displays all the truck travel information i.e, distance traveled and time delivering
     elif user_input == 'd':
         print('\nTruck 1 - ' + str(round(truck1.miles_driven, 2)) + ' miles')
         print('Time on delivery route -- 08:00 AM - ' + truck1.return_time)
@@ -164,6 +172,7 @@ while user_input != 'q':
         print('Time on delivery route -- 10:20 AM - ' + truck3.return_time)
         print('\nTotal distance driven is ' + str(total_distance) + '\n\n')
 
+    # Allows the user to quit out of the program gracefully
     elif user_input == 'q':
         break
 
